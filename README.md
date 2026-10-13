@@ -3,7 +3,7 @@
 A small job-discovery pipeline with two halves:
 
 - **Automated, no LLM:** a Docker container reads companies' public applicant-tracking-system (ATS) job boards once a day. It filters the roles by title and location, keeps only roles it hasn't seen before, and writes a Markdown note plus an HTML page of every open match.
-- **Agentic:** in a session started by a person, an LLM agent (Claude Code) reads that note, scores each role against a rubric, and tracks the chosen applications in a self-hosted [Reactive Resume](https://github.com/AmruthPillai/Reactive-Resume) through its MCP server. The agent prepares everything; a person reviews and submits every application.
+- **Agentic:** in a session started by a person, an LLM agent (Claude Code) reads that note, scores each role against a rubric, and tracks the chosen applications in a self-hosted [Reactive Resume](https://github.com/reactive-resume/reactive-resume) through its MCP server. The agent prepares everything; a person reviews and submits every application.
 
 This repo holds the code for the automated half. The agent half is a playbook, not code: [docs/agent-workflow.md](docs/agent-workflow.md) has the rubric, the steps and the MCP tool calls.
 
@@ -110,6 +110,14 @@ When something breaks, the note opens with a warning such as `> [!warning] Sweep
 | `us_remote.py out.json companies.txt` | Checks the descriptions of US-remote roles for US-residency or work-authorisation requirements. |
 | `filter.py out.json` | Narrows a sweep to Europe and global-remote roles on the target tracks. |
 | `ashby_dump.py "<org>" "<title regex>"` | Prints matching postings from one Ashby board. |
+
+## Tests
+
+```bash
+python3 -m unittest
+```
+
+The tests run offline against mocked board responses. They cover each reader's field mapping, the Lever EU fallback, Workday paging, the title and location filters, and the sweep health checks.
 
 ## Licence
 

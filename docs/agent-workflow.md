@@ -17,7 +17,7 @@ Two rules apply throughout:
 | Searching the web for postings | Agent | Reactive Resume MCP: `api_applications_ai_search_postings` (Tavily, five links per search) |
 | Scoring and dedupe | Agent | Rubric below; checked against applications already in Reactive Resume |
 | Tailored resume and cover letter | Agent | Reactive Resume MCP: a tailored copy of a master resume |
-| Filling the application form | Agent | Claude in Chrome, one tab per role, stopping before the submit button |
+| Preparing the application for review | Agent | Claude in Chrome, one tab per role. The agent never submits. |
 | Review and submit | **Person** | Checks each tab and submits |
 | Stage updates and follow-ups | Agent | Reactive Resume MCP |
 
@@ -75,7 +75,7 @@ All calls are tools on the self-hosted Reactive Resume MCP server unless marked 
 | 5. Tailor it with targeted edits, then run the resume checks (contact, dates, layout, headings, writing) | `read_resume`, `apply_resume_patch` (JSON Patch), `api_rest_check_resume` |
 | 6. Write the cover letter, linked to the application and resume. Body text only: the structured layout adds its own greeting and sign-off | `create_cover_letter`, `update_cover_letter` |
 | 7. Export the files to upload | `download_resume_pdf`, `api_rest_document_exports_letter` |
-| 8. Fill the employer's form in a new browser tab and stop before submit | Claude in Chrome (`tabs_create_mcp`, `navigate`, `find`, `browser_batch`) |
+| 8. Open the employer's application page in a new tab and prepare the application there for the person to review | Claude in Chrome (`tabs_create_mcp`, `navigate`, `find`, `browser_batch`) |
 | 9. After the person submits: move to `applied` and set a follow-up date 7–10 days out. Reaching `applied` also freezes the linked resume as the version sent | `update_application` |
 | Pipeline summary on request | `get_application_stats` |
 
