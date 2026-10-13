@@ -1,0 +1,16 @@
+# Example board list. Copy to data/companies.txt (gitignored) and replace with your own targets.
+# Format: <ats> <token> [display name]
+#   ats: gh (Greenhouse) | lever | ashby | workable | recruitee | personio | workday
+#   token: the company's slug in its board URL, e.g. boards.greenhouse.io/<token>
+#   workday token: <host>/<tenant>/<site> from <host>.myworkdayjobs.com/<site>
+# Lines starting with # are ignored. "# manual:" lines name companies with no readable public
+# board; daily.py lists them in every note as "check by hand".
+gh airbnb Airbnb
+gh pinterest Pinterest
+gh gitlab GitLab
+gh reddit Reddit
+gh duolingo Duolingo
+lever spotify Spotify
+ashby snowflake Snowflake
+workday salesforce.wd12/salesforce/External_Career_Site Salesforce
+# manual: Apple | https://jobs.apple.com/ | own careers site, no public board API

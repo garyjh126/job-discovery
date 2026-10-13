@@ -1,0 +1,18 @@
+# Daily job sweep. Start/stop: docker compose up -d / docker compose down (from this folder).
+# Settings come from .env (copy .env.example). Logs: docker logs job_discovery
+name: job-discovery
+services:
+  sweep:
+    image: python:3.12-slim
+    container_name: job_discovery
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      TZ: ${TZ:-UTC}
+      RUN_HOUR: ${RUN_HOUR:-8}
+      JOB_VAULT: /vault
+      HOST_DIR: ${HOST_DIR:-}
+    volumes:
+      - ./:/app
+      - "${VAULT_INBOX:?set VAULT_INBOX in .env (see .env.example)}:/vault/00 Inbox"
+    command: ["python", "-u", "-I", "scheduler.py"]

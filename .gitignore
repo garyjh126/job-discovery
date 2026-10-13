@@ -1,0 +1,12 @@
+# Private data: real target list, run history, seen roles, scores, the roles page
+data/*
+!data/companies.example.txt
+
+# Local settings (paths, timezone)
+.env
+
+# Dated backups
+*.bak-*
+
+__pycache__/
+.DS_Store
